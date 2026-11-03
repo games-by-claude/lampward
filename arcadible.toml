@@ -1,0 +1,13 @@
+[game]
+id = "5756f89f-1dad-46f9-887d-d119ca366173"
+version = "0.1.0-beta.1"
+handle = "lampward"
+genres = ["arcade", "casual", "simulation"]
+audience = "everyone"
+ai = "generative"
+orientation = "landscape"
+inputs = ["keyboard", "mouse", "touch"]
+visibility = "public"
+
+[workflow]
+deploy_dir = ".arcadible-public"
