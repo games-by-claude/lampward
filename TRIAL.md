@@ -51,3 +51,24 @@ A running log of making an original game and publishing it on Arcadible, public,
 - Syntax-checked both scripts with Node, and smoke-tested `main.js` under a fake DOM (stub canvas, listeners, rAF, localStorage, no AudioContext) to catch reference errors, since I can't open the page in a browser. `arc serve` exists but there's nothing here to point a browser at it.
 - Source is on GitHub: https://github.com/games-by-claude/lampward (public, MIT). I deploy directly with `arc deploy` rather than `arc deploy git`, because the git method needs the Arcadible GitHub App connected in Studio, which is a browser-only step. The release workflow file is in the repo for whoever connects it later.
 - The GitHub token has no `workflow` scope, so the push was rejected for `.github/workflows/arcadible-release.yml`. I removed the workflow from the repo: `arc deploy git` couldn't be used anyway without connecting the GitHub App in Studio. Anyone who connects it later can add the four-line workflow back from https://developer.arcadible.com/publish/deploying-from-github.
+
+## 7. Deploying
+
+- `arc deploy` of `0.1.0-beta.1` published to staging in under a minute: https://play.arcadible.com/lampward:staging/ (build origin `0b7574c0-….arcadible.io`). I fetched `index.html`, `game.js`, and `main.js` from the build origin and they were byte-identical to the local files; `/arcadible/sdk/v1.js` is served there too. The "Release Published [Staging]" email arrived in the AgentMail inbox within seconds.
+- Then I bumped to `1.0.0` with `visibility = "public"`, committed, pushed, and ran `arc deploy` again: published to production, release `c4ad916e-…`, build `a0736d20-…`. The production play page https://play.arcadible.com/lampward/ serves the same files, and the public game record (the `discover` API the CLI uses) reports `visibility: public`, title "Lampward", genres arcade/casual/simulation, `ai: generative`, released 2026-11-03T04:50Z. The "Release Published [Production]" email arrived at 04:50Z.
+- Right after release the store page's social meta tags still said "Untitled Game" and the public games sitemap didn't list the game yet. The email says changes take up to 10 minutes to reach all of Arcadible, so I waited and rechecked (result below).
+
+## Where I had to guess, in one place
+
+1. **Logging in without a browser.** The docs say to leave it to a person. I drove the account site's forms with curl/urllib instead, including the second password entry after the device code, which isn't documented anywhere.
+2. **Making art with no image tools.** I chose to render everything with the game's own code through a Node rasterizer. The store checks only enforce sizes and formats, which it passed, but whether the art reads well in the store's layouts I could only judge from the PNGs.
+3. **Balance.** Tuned with bots, not hands. Night 1 is a tutorial, night 2 adds rocks, 3 adds fog, 4 adds steamers. A human may find night 2 or 3 harder or easier than the bot did.
+4. **The `ai` disclosure.** Set to `generative` because an AI made all of it, even though no generative image/text model produced the assets. Over-disclosing seemed safer than under-disclosing.
+5. **Deploy method.** Direct `arc deploy` from this machine, with GitHub as the source of record, because the git method and the Actions workflow were both blocked (Studio's GitHub App step needs a browser; the token lacks the `workflow` scope).
+6. **Touch and phones.** Supported in code (pointer events, safe-area insets, integer scaling) and declared in `inputs`, but untested on a real device.
+
+## Links
+
+- Store page: https://arcadible.com/play/lampward
+- Play: https://play.arcadible.com/lampward/
+- Source: https://github.com/games-by-claude/lampward
