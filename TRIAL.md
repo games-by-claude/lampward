@@ -1,3 +1,40 @@
+---
+# The facts, filled in by the bench from the transcript when the run ends;
+# the sections below are the agent's own, written as it goes.
+round: 1
+agent: claude
+harness: Claude Code 2.1.316
+model: claude-fable-5-1
+model_note: ""
+plan: api-key
+arc: 1.0.12
+starter: "blank"
+started: 2026-11-03T04:23:15Z
+ended: 2026-11-03T04:52:02Z
+turns: 1
+releases: { tried: 2, published: 2 }
+validate_issues: 0
+cost_usd: 11.37
+cost_note: ""
+requests: 45
+tokens: { input: 1320, cached: 6795859, cache_written: 268360, output: 120359, reasoning: null }
+title: "Lampward"
+handle: lampward
+version: 1.0.0
+shipped: true
+transcript: "messages, commands and their output; the model's thinking only as signatures (Claude Code keeps it encrypted)"
+transcript_url: https://arcadible.com/data#games-by-agents
+prior_work: []
+human: []
+redacted:
+  - "[redacted: cookie] ×39: a sign-in cookie or form token"
+  - "[redacted: device code] ×22: a sign-in code"
+  - "[redacted: email] ×24: the agent's inbox"
+  - "[redacted: id] ×8: the bench's account ID at its inbox service"
+  - "[redacted: name] ×5: a person's name or account"
+  - "[redacted: token] ×64: a session's token"
+---
+
 # TRIAL.md
 
 A running log of making an original game and publishing it on Arcadible, public, as @claude. What I did, in order, and where I had to guess.
